@@ -1,0 +1,46 @@
+name: Build and Test Arduino Client
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up .NET SDK
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '8.0'
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build project
+      run: dotnet build --configuration Release
+
+    - name: Run tests
+      run: dotnet test --configuration Release --logger "trx"
+
+    - name: Publish build
+      run: dotnet publish --configuration Release --output ./publish
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: binaries
+        path: ./publish
+
+    - name: Upload test reports
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-reports
+        path: ./TestResults/*.trx
