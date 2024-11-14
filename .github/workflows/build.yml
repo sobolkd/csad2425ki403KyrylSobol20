@@ -34,13 +34,13 @@ jobs:
       run: dotnet publish ArduinoClient/ArduinoClient.sln --configuration Release --output ./publish
 
     - name: Upload artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: binaries
         path: ./publish
 
     - name: Upload test reports
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: test-reports
         path: ./TestResults/*.trx
