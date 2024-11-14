@@ -1,0 +1,53 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Navchannya\\4.1\\\u0410\u041F\u041A\u0421\\RockPaperScissors\\ArduinoClient\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6C72EAAF-6B5D-41ED-8F7B-8ADC1A2E1456}|ArduinoClient\\ArduinoClient.csproj|c:\\navchannya\\4.1\\\u0430\u043F\u043A\u0441\\rockpaperscissors\\arduinoclient\\arduinoclient\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C72EAAF-6B5D-41ED-8F7B-8ADC1A2E1456}|ArduinoClient\\ArduinoClient.csproj|solutionrelative:arduinoclient\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C72EAAF-6B5D-41ED-8F7B-8ADC1A2E1456}|ArduinoClient\\ArduinoClient.csproj|C:\\Navchannya\\4.1\\\u0410\u041F\u041A\u0421\\RockPaperScissors\\ArduinoClient\\arduinoclient\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{6C72EAAF-6B5D-41ED-8F7B-8ADC1A2E1456}|ArduinoClient\\ArduinoClient.csproj|solutionrelative:arduinoclient\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Navchannya\\4.1\\\u0410\u041F\u041A\u0421\\RockPaperScissors\\ArduinoClient\\ArduinoClient\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "ArduinoClient\\MainWindow.xaml",
+              "ToolTip": "C:\\Navchannya\\4.1\\\u0410\u041F\u041A\u0421\\RockPaperScissors\\ArduinoClient\\ArduinoClient\\MainWindow.xaml",
+              "RelativeToolTip": "ArduinoClient\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-11-14T03:11:12.619Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Navchannya\\4.1\\\u0410\u041F\u041A\u0421\\RockPaperScissors\\ArduinoClient\\ArduinoClient\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "ArduinoClient\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Navchannya\\4.1\\\u0410\u041F\u041A\u0421\\RockPaperScissors\\ArduinoClient\\ArduinoClient\\MainWindow.xaml.cs",
+              "RelativeToolTip": "ArduinoClient\\MainWindow.xaml.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAA2AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-14T03:11:10.201Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

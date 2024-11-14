@@ -1,0 +1,12 @@
+﻿<Window x:Class="ArduinoClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Arduino Client" Height="200" Width="400"
+        Closing="Window_Closing">
+    <Grid>
+        <TextBox x:Name="MessageToSend" HorizontalAlignment="Left" Height="30" Margin="10,10,0,0" VerticalAlignment="Top" Width="260"/>
+        <Button Content="Send" HorizontalAlignment="Left" Margin="280,10,0,0" VerticalAlignment="Top" Width="80" Click="SendButton_Click"/>
+        <TextBox x:Name="ReceivedMessage" HorizontalAlignment="Left" Height="30" Margin="10,60,0,0" VerticalAlignment="Top" Width="350" IsReadOnly="True"/>
+        <Label Content="Received Message:" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Window>
