@@ -21,20 +21,17 @@ jobs:
       with:
         dotnet-version: '8.0'
 
-    - name: Navigate to project directory
-      run: cd ArduinoClient
-
     - name: Restore dependencies
-      run: dotnet restore ArduinoClient.csproj
+      run: dotnet restore ArduinoClient/ArduinoClient.sln
 
     - name: Build project
-      run: dotnet build --configuration Release
+      run: dotnet build ArduinoClient/ArduinoClient.sln --configuration Release
 
     - name: Run tests
-      run: dotnet test --configuration Release --logger "trx"
+      run: dotnet test ArduinoClient/ArduinoClient.sln --configuration Release --logger "trx"
 
     - name: Publish build
-      run: dotnet publish --configuration Release --output ./publish
+      run: dotnet publish ArduinoClient/ArduinoClient.sln --configuration Release --output ./publish
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
