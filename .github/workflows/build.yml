@@ -25,11 +25,13 @@ jobs:
       with:
         dotnet-version: '8.0'
 
-    # 3. Встановлення arduino-cli
+    # 3. Встановлення arduino-cli вручну для Windows
     - name: Install arduino-cli
       run: |
-        curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
-        echo "PATH=${HOME}/bin:$PATH" >> $GITHUB_ENV
+        Invoke-WebRequest -Uri https://downloads.arduino.cc/arduino-cli/arduino-cli_latest_Windows_64bit.zip -OutFile arduino-cli.zip
+        Expand-Archive arduino-cli.zip -DestinationPath C:\arduino-cli
+        $env:Path = "$env:Path;C:\arduino-cli"
+        echo "PATH=$env:Path" >> $GITHUB_ENV
 
     # 4. Налаштування Arduino CLI
     - name: Configure Arduino CLI
