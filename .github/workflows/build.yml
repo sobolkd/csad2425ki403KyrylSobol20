@@ -1,4 +1,4 @@
-name: Build and Test Arduino Client
+name: Build, Test, and Deploy
 
 on:
   push:
@@ -13,14 +13,34 @@ jobs:
     runs-on: windows-latest
 
     steps:
+    # 1. Checkout репозиторій
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    # 2. Встановлення .NET SDK
     - name: Set up .NET SDK
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: '8.0'
 
+    # 3. Встановлення arduino-cli
+    - name: Install Arduino CLI
+      run: |
+        curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
+        echo "::add-path::${HOME}/bin"
+
+    # 4. Налаштування Arduino CLI
+    - name: Configure Arduino CLI
+      run: |
+        arduino-cli core update-index
+        arduino-cli core install arduino:avr
+
+    # 5. Компіляція прошивки
+    - name: Compile Arduino Sketch
+      run: |
+        arduino-cli compile --fqbn arduino:avr:uno C:/Navchannya/4.1/АПКС/RockPaperScissors/ServerCommunication
+
+    # 6. Тестування C# проекту
     - name: Restore dependencies
       run: dotnet restore ArduinoClient/ArduinoClient.sln
 
@@ -30,6 +50,12 @@ jobs:
     - name: Run tests
       run: dotnet test ArduinoClient/ArduinoClient.sln --configuration Release --logger "trx"
 
+    # 7. Завантаження прошивки (опціонально)
+    - name: Upload Firmware to Arduino
+      run: |
+        arduino-cli upload --fqbn arduino:avr:uno --port COM5 C:/Navchannya/4.1/АПКС/RockPaperScissors/ServerCommunication
+
+    # 8. Публікація артефактів
     - name: Publish build
       run: dotnet publish ArduinoClient/ArduinoClient.sln --configuration Release --output ./publish
 
