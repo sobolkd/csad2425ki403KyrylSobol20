@@ -26,10 +26,10 @@ jobs:
         dotnet-version: '8.0'
 
     # 3. Встановлення arduino-cli
-    - name: Install Arduino CLI
+    - name: Install arduino-cli
       run: |
         curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
-        echo "::add-path::${HOME}/bin"
+        echo "PATH=${GITHUB_WORKSPACE}/bin:$PATH" >> $GITHUB_ENV
 
     # 4. Налаштування Arduino CLI
     - name: Configure Arduino CLI
@@ -40,26 +40,26 @@ jobs:
     # 5. Компіляція прошивки
     - name: Compile Arduino Sketch
       run: |
-        arduino-cli compile --fqbn arduino:avr:uno C:/Navchannya/4.1/АПКС/RockPaperScissors/ServerCommunication
+        arduino-cli compile --fqbn arduino:avr:uno ${GITHUB_WORKSPACE}/RockPaperScissors/ServerCommunication
 
     # 6. Тестування C# проекту
     - name: Restore dependencies
-      run: dotnet restore ArduinoClient/ArduinoClient.sln
+      run: dotnet restore ${GITHUB_WORKSPACE}/ArduinoClient/ArduinoClient.sln
 
     - name: Build project
-      run: dotnet build ArduinoClient/ArduinoClient.sln --configuration Release
+      run: dotnet build ${GITHUB_WORKSPACE}/ArduinoClient/ArduinoClient.sln --configuration Release
 
     - name: Run tests
-      run: dotnet test ArduinoClient/ArduinoClient.sln --configuration Release --logger "trx"
+      run: dotnet test ${GITHUB_WORKSPACE}/ArduinoClient/ArduinoClient.sln --configuration Release --logger "trx"
 
     # 7. Завантаження прошивки (опціонально)
     - name: Upload Firmware to Arduino
       run: |
-        arduino-cli upload --fqbn arduino:avr:uno --port COM5 C:/Navchannya/4.1/АПКС/RockPaperScissors/ServerCommunication
+        arduino-cli upload --fqbn arduino:avr:uno --port COM5 ${GITHUB_WORKSPACE}/RockPaperScissors/ServerCommunication
 
     # 8. Публікація артефактів
     - name: Publish build
-      run: dotnet publish ArduinoClient/ArduinoClient.sln --configuration Release --output ./publish
+      run: dotnet publish ${GITHUB_WORKSPACE}/ArduinoClient/ArduinoClient.sln --configuration Release --output ./publish
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
