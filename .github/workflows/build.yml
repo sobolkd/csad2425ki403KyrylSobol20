@@ -28,10 +28,8 @@ jobs:
     # 3. Встановлення arduino-cli
     - name: Install arduino-cli
       run: |
-        Invoke-WebRequest -Uri https://downloads.arduino.cc/arduino-cli/arduino-cli_1.1.0_Windows_64bit.zip -OutFile arduino-cli.zip
-        Expand-Archive arduino-cli.zip -DestinationPath "$env:USERPROFILE\bin"
-        echo "$env:USERPROFILE\bin" >> $env:GITHUB_PATH
-        echo "PATH=$env:USERPROFILE\bin:$env:PATH" >> $env:GITHUB_PATH
+        curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
+        echo "PATH=${HOME}/bin:$PATH" >> $GITHUB_ENV
 
     # 4. Налаштування Arduino CLI
     - name: Configure Arduino CLI
@@ -40,9 +38,14 @@ jobs:
         arduino-cli core install arduino:avr
 
     # 5. Компіляція прошивки
+    - name: Check file path
+      run: |
+        echo "Checking if file exists:"
+        dir "C:/Navchannya/4.1/АПКС/RockPaperScissors/ServerCommunication"
+
     - name: Compile Arduino Sketch
       run: |
-        arduino-cli compile --fqbn arduino:avr:uno C:/Navchannya/4.1/АПКС/RockPaperScissors/ServerCommunication
+        arduino-cli compile --fqbn arduino:avr:uno "C:/Navchannya/4.1/АПКС/RockPaperScissors/ServerCommunication"
 
     # 6. Тестування C# проекту
     - name: Restore dependencies
@@ -57,7 +60,7 @@ jobs:
     # 7. Завантаження прошивки (опціонально)
     - name: Upload Firmware to Arduino
       run: |
-        arduino-cli upload --fqbn arduino:avr:uno --port COM5 C:/Navchannya/4.1/АПКС/RockPaperScissors/ServerCommunication
+        arduino-cli upload --fqbn arduino:avr:uno --port COM5 "C:/Navchannya/4.1/АПКС/RockPaperScissors/ServerCommunication"
 
     # 8. Публікація артефактів
     - name: Publish build
