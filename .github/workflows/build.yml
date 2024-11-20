@@ -35,10 +35,7 @@ jobs:
         Expand-Archive arduino-cli.zip -DestinationPath C:\arduino-cli
         
         # Додаємо шлях до Arduino CLI в PATH
-        $env:Path = "$env:Path;C:\arduino-cli"
-        
-        # Оновлюємо змінну середовища для подальших кроків
-        echo "PATH=$env:Path" >> $GITHUB_ENV
+        echo "::add-path::C:\arduino-cli"
 
     # 4. Налаштування Arduino CLI
     - name: Configure Arduino CLI
