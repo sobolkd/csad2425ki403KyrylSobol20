@@ -31,7 +31,7 @@ jobs:
         curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
         echo "Adding arduino-cli to PATH"
         echo "${HOME}/bin" >> $GITHUB_ENV
-        echo "PATH=$PATH:${HOME}/bin" >> $GITHUB_ENV
+        echo "PATH=${HOME}/bin:$PATH" >> $GITHUB_ENV
 
     # 4. Налаштування Arduino CLI
     - name: Configure Arduino CLI
