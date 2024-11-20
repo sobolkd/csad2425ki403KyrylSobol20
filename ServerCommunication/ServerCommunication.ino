@@ -1,3 +1,5 @@
+#include <ArduinoJson.h>
+
 enum Move { Rock, Paper, Scissors };
 
 // Easy mode
@@ -36,16 +38,25 @@ String getMoveString(Move move) {
   }
 }
 
+// Convert string to Move enum
+Move getMoveFromString(String move) {
+  move.trim();
+  if (move == "Rock") return Rock;
+  if (move == "Paper") return Paper;
+  if (move == "Scissors") return Scissors;
+  return Rock;
+}
+
 void setup() {
   Serial.begin(9600); 
-  randomSeed(analogRead(0));  // Ініціалізація генератора випадкових чисел
-  delay(2000);  // Час для ініціалізації серійного з'єднання
+  randomSeed(analogRead(0));
+  delay(2000);
 }
 
 void loop() {
   if (Serial.available()) {
     String message = Serial.readStringUntil('\n');
-    message.trim();  // Очищаємо зайві пробіли
+    message.trim();
 
     int spaceIndex = message.indexOf(' ');
     if (spaceIndex != -1) {
@@ -64,20 +75,20 @@ void loop() {
       else if (difficulty == "Impossible") {
         arduinoMove = getCounterMove(player);
       } else {
-        arduinoMove = getRandomMove(); // Якщо складність невідома, вибираємо випадковий хід
+        arduinoMove = getRandomMove();
       }
 
       String arduinoMoveString = getMoveString(arduinoMove);
-      Serial.println(arduinoMoveString);  // Відправляємо хід назад на ПК
+
+      // Create JSON
+      StaticJsonDocument<200> doc;
+      doc["player_move"] = playerMove;
+      doc["arduino_move"] = arduinoMoveString;
+      doc["difficulty"] = difficulty;
+      String output;
+      serializeJson(doc, output);
+
+      Serial.println(output); 
     }
   }
-}
-
-// Перетворення тексту в тип Move
-Move getMoveFromString(String move) {
-  move.trim();  // Очищаємо зайві пробіли
-  if (move == "Rock") return Rock;
-  if (move == "Paper") return Paper;
-  if (move == "Scissors") return Scissors;
-  return Rock;  // За замовчуванням
 }

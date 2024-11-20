@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "JGoWus9Z+Oe9ZcaaG8fF/ABpNz/uUmgr0sLOuZUGInPuhAfZaHg2cS6lBu4d9G2ViJhKE6ejWBWHZZ3OB/NUgg==",
+  "dgSpecHash": "hfttaoeRlxqvY9GEdJTybS+lqh5pZzhXoYvMbwmOTNC3uj5nqZp1JcQmgmwQmcqVMVu7QqAwvKI/mmFU37iuvA==",
   "success": true,
   "projectFilePath": "C:\\Navchannya\\4.1\\АПКС\\RockPaperScissors\\ArduinoClient\\ArduinoClient\\ArduinoClient.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Sobol\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\Sobol\\.nuget\\packages\\runtime.android-arm.runtime.native.system.io.ports\\9.0.0\\runtime.android-arm.runtime.native.system.io.ports.9.0.0.nupkg.sha512",
     "C:\\Users\\Sobol\\.nuget\\packages\\runtime.android-arm64.runtime.native.system.io.ports\\9.0.0\\runtime.android-arm64.runtime.native.system.io.ports.9.0.0.nupkg.sha512",
     "C:\\Users\\Sobol\\.nuget\\packages\\runtime.android-x64.runtime.native.system.io.ports\\9.0.0\\runtime.android-x64.runtime.native.system.io.ports.9.0.0.nupkg.sha512",
