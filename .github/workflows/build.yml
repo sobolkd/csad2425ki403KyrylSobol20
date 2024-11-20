@@ -28,10 +28,10 @@ jobs:
     # 3. Встановлення arduino-cli
     - name: Install arduino-cli
       run: |
-        curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
-        echo "Adding arduino-cli to PATH"
-        echo "${HOME}/bin" >> $GITHUB_ENV
-        echo "PATH=${HOME}/bin:$PATH" >> $GITHUB_ENV
+        Invoke-WebRequest -Uri https://downloads.arduino.cc/arduino-cli/arduino-cli_1.1.0_Windows_64bit.zip -OutFile arduino-cli.zip
+        Expand-Archive arduino-cli.zip -DestinationPath "$env:USERPROFILE\bin"
+        echo "$env:USERPROFILE\bin" >> $env:GITHUB_PATH
+        echo "PATH=$env:USERPROFILE\bin:$env:PATH" >> $env:GITHUB_PATH
 
     # 4. Налаштування Arduino CLI
     - name: Configure Arduino CLI
