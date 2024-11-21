@@ -42,18 +42,7 @@ jobs:
     - name: Run tests
       run: dotnet test ArduinoClient/ArduinoClient.sln --configuration Release --logger "trx"
 
-    # 5. Завантаження прошивки (опціонально)
-    - name: Upload Firmware to Arduino
-      run: |
-        $arduinoPath = "C:\ArduinoIDE\arduino_debug.exe"
-        $sketchPath = "C:/Navchannya/4.1/АПКС/RockPaperScissors/ServerCommunication/ServerCommunication.ino"
-        $board = "arduino:avr:uno"
-        $port = "COM5"
-        
-        # Завантаження прошивки
-        & $arduinoPath --upload $sketchPath --board $board --port $port
-
-    # 6. Публікація артефактів
+    # 5. Публікація артефактів
     - name: Publish build
       run: dotnet publish ArduinoClient/ArduinoClient.sln --configuration Release --output ./publish
 
