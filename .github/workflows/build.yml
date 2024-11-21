@@ -1,4 +1,4 @@
-name: Build, Test, and Deploy (Arduino IDE)
+name: Build, Test, and Deploy
 
 on:
   push:
@@ -19,22 +19,31 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    # 2. Завантаження та розпаковування Arduino IDE
-    - name: Download and extract Arduino IDE
+    # 2. Встановлення .NET SDK
+    - name: Set up .NET SDK
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '8.0'
+
+    # 3. Завантаження Arduino IDE
+    - name: Download Arduino IDE
       run: |
         curl -fsSL https://downloads.arduino.cc/arduino-ide/arduino-ide_latest_Windows_64bit.zip -o arduino-ide.zip
-        mkdir C:\arduino-ide
-        tar -xf arduino-ide.zip -C C:\arduino-ide --strip-components=1
-        echo "C:\arduino-ide" >> $GITHUB_PATH
+        tar -xf arduino-ide.zip
+        mv arduino-ide*/ C:/ArduinoIDE
 
-    # 3. Компіляція та завантаження скетчу
-    - name: Compile and upload sketch
+    # 4. Налаштування Arduino IDE для компіляції
+    - name: Compile Arduino Sketch
       run: |
-        $env:Path += ";C:\arduino-ide"
-        arduino-ide.exe --verify "C:/Navchannya/4.1/АПКС/RockPaperScissors/ServerCommunication/ServerCommunication.ino"
-        arduino-ide.exe --upload --port COM5 "C:/Navchannya/4.1/АПКС/RockPaperScissors/ServerCommunication/ServerCommunication.ino"
+        $arduinoPath = "C:\ArduinoIDE\arduino_debug.exe"
+        $sketchPath = "C:/Navchannya/4.1/АПКС/RockPaperScissors/ServerCommunication/ServerCommunication.ino"
+        $board = "arduino:avr:uno"
+        $port = "COM5"
+        
+        # Перевірка (compile)
+        & $arduinoPath --verify $sketchPath --board $board --port $port
 
-    # 4. Тестування C# проекту
+    # 5. Тестування C# проекту
     - name: Restore dependencies
       run: dotnet restore ArduinoClient/ArduinoClient.sln
 
@@ -44,7 +53,18 @@ jobs:
     - name: Run tests
       run: dotnet test ArduinoClient/ArduinoClient.sln --configuration Release --logger "trx"
 
-    # 5. Публікація артефактів
+    # 6. Завантаження прошивки (опціонально)
+    - name: Upload Firmware to Arduino
+      run: |
+        $arduinoPath = "C:\ArduinoIDE\arduino_debug.exe"
+        $sketchPath = "C:/Navchannya/4.1/АПКС/RockPaperScissors/ServerCommunication/ServerCommunication.ino"
+        $board = "arduino:avr:uno"
+        $port = "COM5"
+        
+        # Завантаження прошивки
+        & $arduinoPath --upload $sketchPath --board $board --port $port
+
+    # 7. Публікація артефактів
     - name: Publish build
       run: dotnet publish ArduinoClient/ArduinoClient.sln --configuration Release --output ./publish
 
