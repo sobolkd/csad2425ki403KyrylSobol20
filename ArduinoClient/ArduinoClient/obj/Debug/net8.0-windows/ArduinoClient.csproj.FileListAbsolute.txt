@@ -84,3 +84,5 @@ C:\Navchannya\4.1\APKS\RockPaperScissors\ArduinoClient\ArduinoClient\obj\Debug\n
 C:\Navchannya\4.1\APKS\RockPaperScissors\ArduinoClient\ArduinoClient\obj\Debug\net8.0-windows\ArduinoClient.pdb
 C:\Navchannya\4.1\APKS\RockPaperScissors\ArduinoClient\ArduinoClient\obj\Debug\net8.0-windows\ArduinoClient.genruntimeconfig.cache
 C:\Navchannya\4.1\APKS\RockPaperScissors\ArduinoClient\ArduinoClient\obj\Debug\net8.0-windows\ref\ArduinoClient.dll
+C:\Navchannya\4.1\APKS\RockPaperScissors\ArduinoClient\ArduinoClient\bin\Debug\net8.0-windows\nunit.framework.dll
+C:\Navchannya\4.1\APKS\RockPaperScissors\ArduinoClient\ArduinoClient\bin\Debug\net8.0-windows\nunit.framework.legacy.dll
