@@ -35,7 +35,7 @@ jobs:
     # 4. Налаштування Arduino IDE для компіляції
     - name: Compile Arduino Sketch
       run: |
-        $arduinoPath = "C:\ArduinoIDE\arduino.exe"
+        $arduinoPath = "C:\ArduinoIDE\Arduino IDE.exe"
         $sketchPath = "C:/Navchannya/4.1/АПКС/RockPaperScissors/ServerCommunication/ServerCommunication.ino"
         $board = "arduino:avr:uno"
         $port = "COM5"
