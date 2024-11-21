@@ -25,11 +25,11 @@ jobs:
       with:
         dotnet-version: '8.0'
 
-    # 3. Встановлення arduino-cli
+    # 3. Встановлення Arduino CLI
     - name: Install Arduino CLI
       run: |
         curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
-        echo "C:\Users\runneradmin\bin" >> $GITHUB_PATH
+        echo "C:/Users/Sobol/bin" >> $GITHUB_PATH
         arduino-cli version
 
     # 4. Налаштування Arduino CLI
