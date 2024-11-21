@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ArduinoClient")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6d14dc0f7717d079ed0c7d3d10ca64fc7a73964a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6d0615252b7d593151c4c949619187cd5ecdaba7")]
 [assembly: System.Reflection.AssemblyProductAttribute("ArduinoClient")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ArduinoClient")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

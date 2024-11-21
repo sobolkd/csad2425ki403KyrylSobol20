@@ -1780,11 +1780,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Navchannya\\4.1\\АПКС\\RockPaperScissors\\ArduinoClient\\ArduinoClient\\ArduinoClient.csproj",
+      "projectUniqueName": "C:\\Navchannya\\4.1\\APKS\\RockPaperScissors\\ArduinoClient\\ArduinoClient\\ArduinoClient.csproj",
       "projectName": "ArduinoClient",
-      "projectPath": "C:\\Navchannya\\4.1\\АПКС\\RockPaperScissors\\ArduinoClient\\ArduinoClient\\ArduinoClient.csproj",
+      "projectPath": "C:\\Navchannya\\4.1\\APKS\\RockPaperScissors\\ArduinoClient\\ArduinoClient\\ArduinoClient.csproj",
       "packagesPath": "C:\\Users\\Sobol\\.nuget\\packages\\",
-      "outputPath": "C:\\Navchannya\\4.1\\АПКС\\RockPaperScissors\\ArduinoClient\\ArduinoClient\\obj\\",
+      "outputPath": "C:\\Navchannya\\4.1\\APKS\\RockPaperScissors\\ArduinoClient\\ArduinoClient\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

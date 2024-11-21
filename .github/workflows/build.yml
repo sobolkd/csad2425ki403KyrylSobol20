@@ -1,26 +1,38 @@
-name: Build and Test Arduino Client
+name: Build, Test, and Deploy
 
 on:
   push:
     branches:
       - develop
+      - Task3
   pull_request:
     branches:
       - develop
+      - Task3
 
 jobs:
   build:
     runs-on: windows-latest
 
     steps:
+    # 1. Checkout репозиторій
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    # 2. Встановлення .NET SDK
     - name: Set up .NET SDK
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: '8.0'
 
+    # 3. Завантаження Arduino IDE
+    - name: Download Arduino IDE
+      run: |
+        curl -fsSL https://downloads.arduino.cc/arduino-ide/arduino-ide_latest_Windows_64bit.zip -o arduino-ide.zip
+        tar -xf arduino-ide.zip
+        mv arduino-ide*/ C:/ArduinoIDE
+
+    # 4. Тестування C# проекту
     - name: Restore dependencies
       run: dotnet restore ArduinoClient/ArduinoClient.sln
 
@@ -30,6 +42,7 @@ jobs:
     - name: Run tests
       run: dotnet test ArduinoClient/ArduinoClient.sln --configuration Release --logger "trx"
 
+    # 5. Публікація артефактів
     - name: Publish build
       run: dotnet publish ArduinoClient/ArduinoClient.sln --configuration Release --output ./publish
 
