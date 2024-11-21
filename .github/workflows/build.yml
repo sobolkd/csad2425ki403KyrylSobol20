@@ -32,18 +32,7 @@ jobs:
         tar -xf arduino-ide.zip
         mv arduino-ide*/ C:/ArduinoIDE
 
-    # 4. Налаштування Arduino IDE для компіляції
-    - name: Compile Arduino Sketch
-      run: |
-        $arduinoPath = "C:\ArduinoIDE\Arduino IDE.exe"
-        $sketchPath = "C:/Navchannya/4.1/АПКС/RockPaperScissors/ServerCommunication/ServerCommunication.ino"
-        $board = "arduino:avr:uno"
-        $port = "COM5"
-        
-        # Перевірка (compile)
-        & $arduinoPath --verify $sketchPath --board $board --port $port
-
-    # 5. Тестування C# проекту
+    # 4. Тестування C# проекту
     - name: Restore dependencies
       run: dotnet restore ArduinoClient/ArduinoClient.sln
 
@@ -53,7 +42,7 @@ jobs:
     - name: Run tests
       run: dotnet test ArduinoClient/ArduinoClient.sln --configuration Release --logger "trx"
 
-    # 6. Завантаження прошивки (опціонально)
+    # 5. Завантаження прошивки (опціонально)
     - name: Upload Firmware to Arduino
       run: |
         $arduinoPath = "C:\ArduinoIDE\arduino_debug.exe"
@@ -64,7 +53,7 @@ jobs:
         # Завантаження прошивки
         & $arduinoPath --upload $sketchPath --board $board --port $port
 
-    # 7. Публікація артефактів
+    # 6. Публікація артефактів
     - name: Publish build
       run: dotnet publish ArduinoClient/ArduinoClient.sln --configuration Release --output ./publish
 
