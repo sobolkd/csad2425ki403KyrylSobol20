@@ -1,4 +1,4 @@
-name: Build, Test, and Deploy
+name: Build, Test, and Deploy (Arduino IDE)
 
 on:
   push:
@@ -19,32 +19,20 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    # 2. Встановлення .NET SDK
-    - name: Set up .NET SDK
-      uses: actions/setup-dotnet@v2
-      with:
-        dotnet-version: '8.0'
-
-    # 3. Завантаження та встановлення Arduino CLI
-    - name: Install Arduino CLI
+    # 2. Завантаження та встановлення Arduino IDE
+    - name: Install Arduino IDE
       run: |
-        curl -fsSL https://downloads.arduino.cc/arduino-cli/arduino-cli_latest_Windows_64bit.zip -o arduino-cli.zip
-        tar -xf arduino-cli.zip -C $env:USERPROFILE
-        echo "$env:USERPROFILE/arduino-cli.exe" >> $GITHUB_PATH
-        arduino-cli version
+        curl -fsSL https://downloads.arduino.cc/arduino-ide/arduino-ide_latest_Windows_64bit.zip -o arduino-ide.zip
+        tar -xf arduino-ide.zip -C $env:USERPROFILE
+        echo "$env:USERPROFILE/arduino-ide.exe" >> $GITHUB_PATH
 
-    # 4. Налаштування Arduino CLI
-    - name: Configure Arduino CLI
+    # 3. Компіляція та завантаження скетчу
+    - name: Compile and upload sketch
       run: |
-        arduino-cli core update-index
-        arduino-cli core install arduino:avr
+        arduino-ide.exe --verify ./ServerCommunication/ServerCommunication.ino
+        arduino-ide.exe --upload --port COM5 ./ServerCommunication/ServerCommunication.ino
 
-    # 5. Компіляція прошивки
-    - name: Compile Arduino Sketch
-      run: |
-        arduino-cli compile --fqbn arduino:avr:uno ./ServerCommunication
-
-    # 6. Тестування C# проекту
+    # 4. Тестування C# проекту
     - name: Restore dependencies
       run: dotnet restore ArduinoClient/ArduinoClient.sln
 
@@ -54,12 +42,7 @@ jobs:
     - name: Run tests
       run: dotnet test ArduinoClient/ArduinoClient.sln --configuration Release --logger "trx"
 
-    # 7. Завантаження прошивки (опціонально)
-    - name: Upload Firmware to Arduino
-      run: |
-        arduino-cli upload --fqbn arduino:avr:uno --port COM5 ./ServerCommunication
-
-    # 8. Публікація артефактів
+    # 5. Публікація артефактів
     - name: Publish build
       run: dotnet publish ArduinoClient/ArduinoClient.sln --configuration Release --output ./publish
 
