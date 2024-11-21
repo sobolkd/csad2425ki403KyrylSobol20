@@ -19,20 +19,20 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    # 2. Завантаження Arduino IDE
-    - name: Download Arduino IDE
+    # 2. Завантаження та розпаковування Arduino IDE
+    - name: Download and extract Arduino IDE
       run: |
         curl -fsSL https://downloads.arduino.cc/arduino-ide/arduino-ide_latest_Windows_64bit.zip -o arduino-ide.zip
-        tar -xf arduino-ide.zip -C $env:USERPROFILE\arduino-ide
-        echo "$env:USERPROFILE\arduino-ide\arduino-ide.exe" >> $GITHUB_PATH
+        mkdir C:\arduino-ide
+        tar -xf arduino-ide.zip -C C:\arduino-ide --strip-components=1
+        echo "C:\arduino-ide" >> $GITHUB_PATH
 
     # 3. Компіляція та завантаження скетчу
     - name: Compile and upload sketch
       run: |
-        $env:Path += ";$env:USERPROFILE\arduino-ide"
-        $idePath = "$env:USERPROFILE\arduino-ide\arduino-ide.exe"
-        & $idePath --verify ./ServerCommunication/ServerCommunication.ino
-        & $idePath --upload --port COM5 ./ServerCommunication/ServerCommunication.ino
+        $env:Path += ";C:\arduino-ide"
+        arduino-ide.exe --verify "C:/Navchannya/4.1/АПКС/RockPaperScissors/ServerCommunication/ServerCommunication.ino"
+        arduino-ide.exe --upload --port COM5 "C:/Navchannya/4.1/АПКС/RockPaperScissors/ServerCommunication/ServerCommunication.ino"
 
     # 4. Тестування C# проекту
     - name: Restore dependencies
