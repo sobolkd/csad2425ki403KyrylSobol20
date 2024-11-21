@@ -25,36 +25,25 @@ jobs:
       with:
         dotnet-version: '8.0'
 
-    # 3. Встановлення arduino-cli вручну для Windows
-    - name: Install arduino-cli
+    # 3. Налаштування Arduino CLI
+    - name: Add Arduino CLI to PATH
       run: |
-        # Завантажуємо архів з Arduino CLI
-        Invoke-WebRequest -Uri https://downloads.arduino.cc/arduino-cli/arduino-cli_latest_Windows_64bit.zip -OutFile arduino-cli.zip
+        # Додаємо шлях до arduino-cli.exe в PATH
+        $env:Path += ";C:\Users\Sobol\bin"
         
-        # Розпаковуємо архів в директорію
-        Expand-Archive arduino-cli.zip -DestinationPath C:\arduino-cli
-        
-        # Додаємо шлях до Arduino CLI в PATH
-        echo "C:\arduino-cli" >> $GITHUB_PATH
+        # Оновлюємо змінну середовища для наступних кроків
+        echo "PATH=$env:Path" >> $GITHUB_ENV
+
+        # Перевіряємо, чи Arduino CLI доступний
+        arduino-cli version
 
     # 4. Налаштування Arduino CLI
     - name: Configure Arduino CLI
       run: |
-        # Перевіряємо, чи Arduino CLI доступний
-        arduino-cli version
-
-        # Оновлюємо індекс ядер
         arduino-cli core update-index
-
-        # Встановлюємо платформу для Arduino
         arduino-cli core install arduino:avr
 
     # 5. Компіляція прошивки
-    - name: Check file path
-      run: |
-        echo "Checking if file exists:"
-        dir "C:/Navchannya/4.1/АПКС/RockPaperScissors/ServerCommunication"
-
     - name: Compile Arduino Sketch
       run: |
         arduino-cli compile --fqbn arduino:avr:uno "C:/Navchannya/4.1/АПКС/RockPaperScissors/ServerCommunication"
