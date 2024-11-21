@@ -2,7 +2,11 @@
 
 enum Move { Rock, Paper, Scissors };
 
-// Easy mode
+/**
+ * @brief Функція для отримання найслабшого ходу (Easy mode)
+ * @param playerMove Хід гравця
+ * @return Хід для Arduino
+ */
 Move getStupidMove(Move playerMove) {
   switch (playerMove) {
     case Rock: return Scissors; 
@@ -12,13 +16,20 @@ Move getStupidMove(Move playerMove) {
   }
 }
 
-// Normal move
+/**
+ * @brief Функція для отримання випадкового ходу (Normal mode)
+ * @return Випадковий хід
+ */
 Move getRandomMove() {
   int randMove = random(0, 3);  // Випадковий вибір між 0, 1 і 2
   return static_cast<Move>(randMove);
 }
 
-// Impossible mode
+/**
+ * @brief Функція для отримання контрходу (Impossible mode)
+ * @param playerMove Хід гравця
+ * @return Контрхід для Arduino
+ */
 Move getCounterMove(Move playerMove) {
   switch (playerMove) {
     case Rock: return Paper;
@@ -28,7 +39,11 @@ Move getCounterMove(Move playerMove) {
   }
 }
 
-// Convert move to string
+/**
+ * @brief Перетворення ходу в рядок
+ * @param move Хід
+ * @return Рядок, що представляє хід
+ */
 String getMoveString(Move move) {
   switch (move) {
     case Rock: return "Rock";
@@ -38,7 +53,11 @@ String getMoveString(Move move) {
   }
 }
 
-// Convert string to Move enum
+/**
+ * @brief Перетворення рядка в хід
+ * @param move Рядок, що містить хід
+ * @return Хід
+ */
 Move getMoveFromString(String move) {
   move.trim();
   if (move == "Rock") return Rock;
