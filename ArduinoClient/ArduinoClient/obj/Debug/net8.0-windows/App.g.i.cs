@@ -58,7 +58,7 @@ namespace ArduinoClient {
             
             #line default
             #line hidden
-            System.Uri resourceLocater = new System.Uri("/ArduinoClient;V1.0.0.0;component/app.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/ArduinoClient;component/app.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\App.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
