@@ -25,11 +25,12 @@ jobs:
       with:
         dotnet-version: '8.0'
 
-    # 3. Встановлення Arduino CLI
+    # 3. Завантаження та встановлення Arduino CLI
     - name: Install Arduino CLI
       run: |
-        curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
-        echo "C:/Users/Sobol/bin" >> $GITHUB_PATH
+        curl -fsSL https://downloads.arduino.cc/arduino-cli/arduino-cli_latest_Windows_64bit.zip -o arduino-cli.zip
+        tar -xf arduino-cli.zip -C $env:USERPROFILE
+        echo "$env:USERPROFILE/arduino-cli.exe" >> $GITHUB_PATH
         arduino-cli version
 
     # 4. Налаштування Arduino CLI
@@ -41,7 +42,7 @@ jobs:
     # 5. Компіляція прошивки
     - name: Compile Arduino Sketch
       run: |
-        arduino-cli compile --fqbn arduino:avr:uno "C:/Navchannya/4.1/АПКС/RockPaperScissors/ServerCommunication"
+        arduino-cli compile --fqbn arduino:avr:uno ./ServerCommunication
 
     # 6. Тестування C# проекту
     - name: Restore dependencies
@@ -56,7 +57,7 @@ jobs:
     # 7. Завантаження прошивки (опціонально)
     - name: Upload Firmware to Arduino
       run: |
-        arduino-cli upload --fqbn arduino:avr:uno --port COM5 "C:/Navchannya/4.1/АПКС/RockPaperScissors/ServerCommunication"
+        arduino-cli upload --fqbn arduino:avr:uno --port COM5 ./ServerCommunication
 
     # 8. Публікація артефактів
     - name: Publish build
