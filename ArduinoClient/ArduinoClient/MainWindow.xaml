@@ -26,7 +26,7 @@
                     <Button x:Name="ChangeDif_Button" Content="Change Difficulty" Click="ChangeDif_Click"   Margin=" 20" Style="{StaticResource PixelButtonStyle}"/>
                 </StackPanel>
             </StackPanel>
-            
+
         </StackPanel>
     </Grid>
 </Window>
