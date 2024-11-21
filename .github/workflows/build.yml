@@ -25,16 +25,11 @@ jobs:
       with:
         dotnet-version: '8.0'
 
-    # 3. Налаштування Arduino CLI
-    - name: Add Arduino CLI to PATH
+    # 3. Встановлення arduino-cli
+    - name: Install Arduino CLI
       run: |
-        # Додаємо шлях до arduino-cli.exe в PATH
-        $env:Path += ";C:\Users\Sobol\bin"
-        
-        # Оновлюємо змінну середовища для наступних кроків
-        echo "PATH=$env:Path" >> $GITHUB_ENV
-
-        # Перевіряємо, чи Arduino CLI доступний
+        curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
+        echo "C:\Users\runneradmin\bin" >> $GITHUB_PATH
         arduino-cli version
 
     # 4. Налаштування Arduino CLI
